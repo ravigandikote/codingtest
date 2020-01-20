@@ -9,7 +9,6 @@ const NewsListTable = ({ searchResults, onTagClick, viewDetails }) => (
       <tr>
         <th>Thumbnail</th>
         <th>Headline</th>
-        <th>Type</th>
         <th>Details</th>
         <th>Keywords</th>
         <th>Actions</th>
@@ -22,7 +21,7 @@ const NewsListTable = ({ searchResults, onTagClick, viewDetails }) => (
             <tr key={index}>
               <td>
                 <img
-                  style={{ width: 50, height: 50, cursor: 'pointer' }}
+                  style={{ width: 150, height: 120, cursor: 'pointer' }}
                   onClick={() => {
                     viewDetails(item.webUrl)
                   }}
@@ -40,9 +39,6 @@ const NewsListTable = ({ searchResults, onTagClick, viewDetails }) => (
                 >
                   {item.fields.headline}
                 </h6>
-              </td>
-              <td>
-                <h6>{item.type}</h6>
               </td>
               <td>
                 <h6>{item.webTitle}</h6>

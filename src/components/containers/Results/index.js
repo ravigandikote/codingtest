@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { getSearchResults } from 'store/actions/appActions'
 import { connect } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import { css } from '@emotion/core'
 import ClipLoader from 'react-spinners/ClipLoader'
-import BreadCrumbs from 'components/presentational/BreadCrumbs'
-import NewsListTable from 'components/presentational/NewsListTable'
-import NewsPagination from 'components/presentational/Pagination'
-import NewsPageSize from 'components/presentational/NewsPageSize'
+import BreadCrumbs from 'presentational/BreadCrumbs'
+import NewsListTable from 'presentational/NewsListTable'
+import NewsPagination from 'presentational/Pagination'
+import NewsPageSize from 'presentational/NewsPageSize'
+import { Container } from './styles'
 
 function ResultsContainer (props) {
   const { getSearchResults, results } = props
@@ -76,15 +77,28 @@ function ResultsContainer (props) {
   }
 
   return (
-    <>
-      <Container fluid>
-        <BreadCrumbs />
-        <Row>
-          <Col md={('auto', { offset: 1 })}>
-            <h3>Results</h3>
+    <Container>
+      <Row style={{ width: '100%' }}>
+        <Row style={{ width: '100%', display: loading ? 'none' : 'block' }}>
+          <Col md={'12'}>
+            <BreadCrumbs />
           </Col>
         </Row>
-        <Row>
+
+        <Row
+          style={{
+            width: '100%',
+            marginLeft: '10',
+            display: loading ? 'none' : 'block'
+          }}
+        >
+          <Col md={{ span: 10, offset: 1 }}>
+            {!loading && searchResults && searchResults.results.length > 0 && (
+              <h4>Results</h4>
+            )}
+          </Col>
+        </Row>
+        <Row style={{ width: '100%' }}>
           <Col md={{ span: 10, offset: 1 }}>
             <ClipLoader
               css={override}
@@ -102,7 +116,8 @@ function ResultsContainer (props) {
               <h5
                 style={{
                   textAlign: 'center',
-                  display: loading ? 'none' : 'block'
+                  display: loading ? 'none' : 'block',
+                  padding: 10
                 }}
               >
                 No items to show ... Try with different{' '}
@@ -111,8 +126,8 @@ function ResultsContainer (props) {
             )}
           </Col>
         </Row>
-        {searchResults && searchResults.results.length > 0 && (
-          <Row className='justify-content-md-center'>
+        {!loading && searchResults && searchResults.results.length > 0 && (
+          <Row className='justify-content-md-center' style={{ width: '100%' }}>
             <Col md={('auto', { offset: 1 })}>
               <h5>Pagination</h5> {renderPagination()}
             </Col>
@@ -125,8 +140,8 @@ function ResultsContainer (props) {
             </Col>
           </Row>
         )}
-      </Container>
-    </>
+      </Row>
+    </Container>
   )
 }
 

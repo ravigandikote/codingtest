@@ -2,9 +2,9 @@
  * App config action to handle the global config api.
  */
 
-import { makeRequestActionCreator } from '../../utils/redux'
+import { makeRequestActionCreator } from 'utils/redux'
+import { GET_SEARCH_RESULTS, GET_SEARCH_TAGS } from 'config/Constants'
 
-export const GET_SEARCH_RESULTS = 'GET_SEARCH_RESULTS'
 export const getSearchResults = searchObj => dispatch => {
   const request = makeRequestActionCreator(GET_SEARCH_RESULTS, searchObj)
 
@@ -25,7 +25,6 @@ export const getSearchResults = searchObj => dispatch => {
   )
 }
 
-export const GET_SEARCH_TAGS = 'GET_SEARCH_TAGS'
 export const getSearchTags = searchObj => dispatch => {
   const request = makeRequestActionCreator(GET_SEARCH_TAGS, searchObj)
 

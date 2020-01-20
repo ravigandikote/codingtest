@@ -1,8 +1,9 @@
 import React from 'react'
 import { ButtonGroup } from 'react-bootstrap'
 import PageSizeButton from './PageSizeButton'
+import { PAGE_SIZES_LIST } from 'config/Constants'
 
-const pageSizesArr = [5, 10, 15, 20]
+const pageSizesArr = PAGE_SIZES_LIST
 
 const NewsPageSize = ({ pageSize, handlePageSize }) => (
   <ButtonGroup className='mr-2' aria-label='First group'>

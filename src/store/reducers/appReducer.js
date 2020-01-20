@@ -2,7 +2,7 @@
  * App config reducer to handle the global config api responses.
  */
 
-import { GET_SEARCH_RESULTS, GET_SEARCH_TAGS } from 'store/actions/appActions'
+import { GET_SEARCH_RESULTS, GET_SEARCH_TAGS } from 'config/Constants'
 
 const initState = {
   results: null,

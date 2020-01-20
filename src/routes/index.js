@@ -1,31 +1,46 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import SearchContainer from 'container/SearchContainer'
-import ResultsContainer from 'container/ResultsContainer'
-import Shell from 'container/Shell'
-import AppRoute from './AppRoute.js'
+import React from 'react'
+import SearchContainer from 'containers/Search'
+import ResultsContainer from 'containers/Results'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-class Routes extends Component {
-  constructor (props, context) {
-    super(props, context)
+const ROUTES = [
+  { path: '/', key: 'ROOT', exact: true, component: SearchContainer },
+  {
+    path: '/search',
+    key: 'APP_SEARCH',
+    exact: true,
+    component: SearchContainer
+  },
+  {
+    path: '/results/:searchText',
+    key: 'APP_RESULTS',
+    exact: true,
+    component: ResultsContainer
   }
+]
 
-  render () {
-    return (
-      <Router>
-        <Shell>
-          <Switch>
-            <Route exact path='/'>
-              <AppRoute Component={SearchContainer} />
-            </Route>
-            <Route path='/results/:searchText'>
-              <AppRoute Component={ResultsContainer} />
-            </Route>
-          </Switch>
-        </Shell>
-      </Router>
-    )
-  }
+export function RenderRoutes ({ routes }) {
+  return (
+    <Router>
+      <Switch>
+        {routes.map((route, i) => {
+          return (
+            <Route
+              key={route.key}
+              path={route.path}
+              exact={route.exact}
+              render={props => (
+                <route.component {...props} routes={route.routes} />
+              )}
+            />
+          )
+        })}
+        <Route
+          component={() => <h2 style={{ padding: '20px' }}>Not Found!</h2>}
+        />
+      </Switch>
+    </Router>
+  )
 }
 
-export default Routes
+export default ROUTES
