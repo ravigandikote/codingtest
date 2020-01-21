@@ -18,7 +18,7 @@ const Header = ({}) => (
   <>
     <Container>
       <a href='/'>
-        <img src={Logo} href='/' />
+        /*<img src={Logo} href='/' />*/
       </a>
     </Container>
   </>
