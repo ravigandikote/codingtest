@@ -17,9 +17,7 @@ const Container = styled.div`
 const Header = ({}) => (
   <>
     <Container>
-      <a href='/'>
-        /*<img src={Logo} href='/' />*/
-      </a>
+      <a href='/'>{/* <img src={Logo} href='/' /> */}</a>
     </Container>
   </>
 )
