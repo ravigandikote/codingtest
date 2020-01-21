@@ -16,21 +16,23 @@ import {
   TagsBox
 } from './styles'
 import { SEARCH_TEXT_FIELD_PLACEHOLDER } from 'config/Constants'
+import { useDebouncedCallback } from 'use-debounce'
 
 function SearchContainer (props) {
   var history = useHistory()
   const { getSearchTags, tags } = props
   const [searchText, setSearchText] = useState('')
-  const [searchTags, setSearchTags] = useState(tags)
 
-  function handleChange (event) {
-    setSearchText(event.target.value)
+  const [debouncedCallback] = useDebouncedCallback(value => {
+    setSearchText(value)
     getSearchTags({
-      query: event.target.value
+      query: value
     }).then(res => {
       setSearchTags(res.payload.response)
     })
-  }
+  }, 1000)
+
+  const [searchTags, setSearchTags] = useState(tags)
 
   useEffect(
     () => {
@@ -69,7 +71,10 @@ function SearchContainer (props) {
                 placeholder={SEARCH_TEXT_FIELD_PLACEHOLDER}
                 id='search_text'
                 value={searchText}
-                handleChange={handleChange}
+                handleChange={e =>
+                  setSearchText(e.target.value) &
+                  debouncedCallback(e.target.value)
+                }
                 onInputKeyDown={onInputKeyDown}
               />
               <TagsBox>
