@@ -9,6 +9,7 @@ const plugins = [
   new Dotenv(),
   new HtmlWebPackPlugin({
     template: path.join(__dirname, 'src', 'index.html'),
+    favicon: 'src/assets/images/logo.png',
     filename: './index.html'
   }),
   new webpack.DefinePlugin({
