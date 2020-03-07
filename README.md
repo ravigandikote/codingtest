@@ -3,7 +3,7 @@
 - npm install &
 - npm start
 
-## Integrated the following things today
+## Integrated the following
 
 1. Webpack Merge
 2. ThemeProvider + Styled-Components + Global Styles
